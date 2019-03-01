@@ -20,8 +20,8 @@ namespace BoilerExam.Controllers
 
     // GET: api/Questions
     public async Task<IHttpActionResult> GetQuestions(
-        [FromUri]int? page,
-        [FromUri] int? pageSize,
+        [FromUri]int? page = null,
+        [FromUri] int? pageSize = null,
         [FromUri] string tags = null
       )
     {
