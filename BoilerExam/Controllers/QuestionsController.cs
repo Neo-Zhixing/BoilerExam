@@ -20,8 +20,8 @@ namespace BoilerExam.Controllers
 
     // GET: api/Questions
     public async Task<IHttpActionResult> GetQuestions(
-        [FromUri]int? page = null,
-        [FromUri] int? pageSize = null,
+        [FromUri]int page = 1,
+        [FromUri] int pageSize = 20,
         [FromUri] string tags = null
       )
     {
@@ -51,8 +51,7 @@ namespace BoilerExam.Controllers
       if (page is int pageNum)
       {
         var totalEntries = await query.CountAsync();
-        var size = pageSize ?? 20;
-        var totalPages = (int)Math.Ceiling(totalEntries / (float)size);
+        var totalPages = (int)Math.Ceiling(totalEntries / (float)pageSize);
         //Response.Headers.Add("X-Total-Page-Count", totalPages.ToString());
         //Response.Headers.Add("X-Total-Count", totalEntries.ToString());
         if (totalEntries == 0)
@@ -61,11 +60,16 @@ namespace BoilerExam.Controllers
           return BadRequest();
         query = query
             .OrderBy(a => a.Id)
-            .Skip((pageNum - 1) * size)
-            .Take(size);
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize);
+        return Ok(new
+        {
+          data = await query.ToListAsync(),
+          totalEntries = totalEntries,
+          totalPages = totalPages
+        });
       }
-      var theList = await query.ToListAsync();
-      return Ok(theList);
+      return Ok(await query.ToListAsync());
     }
 
     // GET: api/Questions/5
@@ -267,6 +271,37 @@ namespace BoilerExam.Controllers
         Combinations = vm.Combinations,
         Options = vm.Options
       };
+    }
+    [Route("api/Questions/bulk")]
+    [HttpPost]
+    public async Task<IHttpActionResult> bulkCreate(IEnumerable<QuestionViewModel> vms)
+    {
+      var questions = vms.Select(q => CreateQuestionFromViewModel(q));
+      foreach (Question question in questions)
+      {
+        if (!question.Verify())
+        {
+          return BadRequest();
+        }
+      }
+
+      db.Questions.AddRange(questions);
+      try
+      {
+        await db.SaveChangesAsync();
+      }
+      catch (DbUpdateException)
+      {
+        foreach (QuestionViewModel vm in vms)
+        {
+          if (!this.AllTagsExist(vm.Tags))
+          {
+            return BadRequest();
+          }
+        }
+        throw;
+      }
+      return Ok("success");
     }
   }
 }

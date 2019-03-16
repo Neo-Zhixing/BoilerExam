@@ -146,5 +146,18 @@ namespace BoilerExam.Controllers
         {
             return db.Tags.Count(e => e.Id == id) > 0;
         }
-    }
+        // POST: api/Tags/bulk
+        [Route("api/Tags/bulk")]
+        [HttpPost]
+        public async Task<IHttpActionResult> PostTags(IEnumerable<Tag> tags)
+        {
+          foreach (Tag tag in tags)
+          {
+            //tag.Id = 0;
+          }
+          db.Tags.AddRange(tags);
+          await db.SaveChangesAsync();
+          return Ok("success");
+        }
+  }
 }
