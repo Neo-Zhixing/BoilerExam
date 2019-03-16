@@ -15,20 +15,6 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace BoilerExam.Models
 {
-    public class ExamLibraryContext: DbContext
-    {
-        public ExamLibraryContext(): base("Context")
-        {
-        }
-
-        public DbSet<Question> Questions { get; set; }
-        public DbSet<Tag> Tags { get; set; }
-        public DbSet<QuestionTag> QuestionTag { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-        }
-    }
     public class Question
     {
         public int Id { get; set; }

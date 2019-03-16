@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -100,7 +101,13 @@
     <Compile Include="Migrations\201902180456244_InitialCreate.Designer.cs">
       <DependentUpon>201902180456244_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903160758274_Exams.cs" />
+    <Compile Include="Migrations\201903160758274_Exams.Designer.cs">
+      <DependentUpon>201903160758274_Exams.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Context.cs" />
+    <Compile Include="Models\Exam.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -120,6 +127,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902180456244_InitialCreate.resx">
       <DependentUpon>201902180456244_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903160758274_Exams.resx">
+      <DependentUpon>201903160758274_Exams.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
