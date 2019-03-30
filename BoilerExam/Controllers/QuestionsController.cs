@@ -76,7 +76,10 @@ namespace BoilerExam.Controllers
     [ResponseType(typeof(Question))]
     public async Task<IHttpActionResult> GetQuestion(int id)
     {
-      var question = await db.Questions.FindAsync(id);
+      var question = await db.Questions
+      .Include(q => q.Parent)
+      .Where(q => q.Id == id)
+      .FirstAsync();
 
       if (question == null)
       {
@@ -94,6 +97,7 @@ namespace BoilerExam.Controllers
     public class QuestionViewModel
     {
       public int? Id;
+      public int? ParentId;
       public string Content;
       public IEnumerable<int> Tags;
       public ICollection<string> Options;
@@ -154,7 +158,9 @@ namespace BoilerExam.Controllers
     [ResponseType(typeof(Question))]
     public async Task<IHttpActionResult> PostQuestion([FromBody]QuestionViewModel vm)
     {
-      System.Diagnostics.Debug.WriteLine(vm.Content);
+      if (vm == null) {
+        return BadRequest("Malformed Data");
+      }
       var question = CreateQuestionFromViewModel(vm);
       if (!question.Verify())
       {
@@ -233,7 +239,7 @@ namespace BoilerExam.Controllers
       var tagIdsToBeAdded = updatedTagIds.Except(existingTagIds); // Tags to be Added
       var tagIdsToBeRemoved = existingTagIds.Except(updatedTagIds);
 
-      foreach (QuestionTag questionTag in qts)
+      foreach (QuestionTag questionTag in qts.ToList())
       {
         if (tagIdsToBeRemoved.Contains(questionTag.TagId))
         {
@@ -258,9 +264,11 @@ namespace BoilerExam.Controllers
     }
     private Question CreateQuestionFromViewModel(QuestionViewModel vm)
     {
+      System.Diagnostics.Debug.WriteLine(vm);
       return new Question
       {
         Content = vm.Content ?? "",
+        ParentId = vm.ParentId,
         QuestionTags = vm.Tags == null ? null : vm.Tags
                 .Select(tagId => new QuestionTag()
                 {

@@ -105,6 +105,10 @@
     <Compile Include="Migrations\201903160758274_Exams.Designer.cs">
       <DependentUpon>201903160758274_Exams.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903300629477_CloneQuestion.cs" />
+    <Compile Include="Migrations\201903300629477_CloneQuestion.Designer.cs">
+      <DependentUpon>201903300629477_CloneQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Exam.cs" />
@@ -130,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903160758274_Exams.resx">
       <DependentUpon>201903160758274_Exams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903300629477_CloneQuestion.resx">
+      <DependentUpon>201903300629477_CloneQuestion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

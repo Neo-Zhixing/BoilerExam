@@ -19,6 +19,9 @@ namespace BoilerExam.Models
     {
         public int Id { get; set; }
 
+        public int? ParentId { get; set; }
+        public Question Parent { get; set; }
+
         [Required]
         public string Content { get; set; }
 
