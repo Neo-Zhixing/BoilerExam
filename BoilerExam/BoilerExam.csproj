@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -109,9 +110,14 @@
     <Compile Include="Migrations\201903300629477_CloneQuestion.Designer.cs">
       <DependentUpon>201903300629477_CloneQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903310631539_Files.cs" />
+    <Compile Include="Migrations\201903310631539_Files.Designer.cs">
+      <DependentUpon>201903310631539_Files.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Exam.cs" />
+    <Compile Include="Models\File.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903300629477_CloneQuestion.resx">
       <DependentUpon>201903300629477_CloneQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903310631539_Files.resx">
+      <DependentUpon>201903310631539_Files.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

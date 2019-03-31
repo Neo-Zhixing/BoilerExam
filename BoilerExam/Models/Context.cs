@@ -27,6 +27,8 @@ namespace BoilerExam.Models
     public DbSet<Exam> Exams { get; set; }
     public DbSet<ExamQuestion> ExamQuestions { get; set; }
 
+    public DbSet<File> Files { get; set; }
+
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
     }
