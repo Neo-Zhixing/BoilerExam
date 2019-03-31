@@ -79,7 +79,7 @@ namespace BoilerExam.Controllers
       var question = await db.Questions
       .Include(q => q.Parent)
       .Where(q => q.Id == id)
-      .FirstAsync();
+      .FirstOrDefaultAsync();
 
       if (question == null)
       {

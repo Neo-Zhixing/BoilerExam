@@ -157,7 +157,10 @@ namespace BoilerExam.Models
 
             return true;
         }
-    }
+        
+    [ForeignKey("QuestionId")]
+    public virtual ICollection<File> Attachments { get; set; }
+  }
     public class Tag
     {
         public int Id { get; set; }

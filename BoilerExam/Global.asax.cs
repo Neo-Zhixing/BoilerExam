@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +12,10 @@ namespace BoilerExam
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+      HttpConfiguration config = GlobalConfiguration.Configuration;
+      config.Formatters.JsonFormatter
+      .SerializerSettings
+      .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
         }
     }
 }
