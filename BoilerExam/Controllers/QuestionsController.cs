@@ -127,7 +127,9 @@ namespace BoilerExam.Controllers
         return BadRequest();
       }
 
-      db.Entry(question).State = EntityState.Modified;
+      var entry = db.Entry(question);
+      entry.State = EntityState.Modified;
+      entry.Property("ParentId").IsModified = false;
 
       await db.Entry(question)
           .Collection(q => q.QuestionTags)
