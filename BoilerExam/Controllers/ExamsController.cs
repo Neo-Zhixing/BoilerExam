@@ -53,7 +53,7 @@ namespace BoilerExam.Controllers
       }
       var oldExamQuestions = await db.ExamQuestions.Where(eq => eq.ExamId == id).ToListAsync();
       var oldExamQuestionTable = oldExamQuestions.ToDictionary(eq => eq.QuestionId, eq => eq);
-      HashSet<int> examsToKeep = new HashSet<int>();
+      var newExams = new HashSet<ExamQuestion>();
       foreach (var examQuestion in exam.ExamQuestions)
       {
         examQuestion.ExamId = id;
@@ -62,11 +62,13 @@ namespace BoilerExam.Controllers
           oldEQ.Points = examQuestion.Points;
           oldExamQuestionTable.Remove(examQuestion.QuestionId);
         } else {
-          db.Entry(examQuestion).State = EntityState.Added;
+          newExams.Add(examQuestion);
         }
       }
+      exam.ExamQuestions = null;
       var examsToRemove = oldExamQuestionTable.Values;
       db.ExamQuestions.RemoveRange(examsToRemove);
+      db.ExamQuestions.AddRange(newExams);
 
       db.Entry(exam).State = EntityState.Modified;
 

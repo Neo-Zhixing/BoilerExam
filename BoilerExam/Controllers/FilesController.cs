@@ -81,7 +81,7 @@ namespace BoilerExam.Controllers
 
     [Route("api/Questions/{questionId}/Attachments")]
     [HttpGet]
-    public async Task<IHttpActionResult> ListFile(int questionId)
+    public IHttpActionResult ListFile(int questionId)
     {
       if (!this.db.Questions.Any(o => o.Id == questionId))
       {
