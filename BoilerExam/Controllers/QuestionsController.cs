@@ -91,6 +91,7 @@ namespace BoilerExam.Controllers
           .Query()
           .Include(qc => qc.Tag)
           .LoadAsync();
+          
       return Ok(question);
     }
 
@@ -267,7 +268,7 @@ namespace BoilerExam.Controllers
       System.Diagnostics.Debug.WriteLine(vm);
       return new Question
       {
-        Content = vm.Content ?? "",
+        Content = vm.Content ?? "Placeholder Content",
         ParentId = vm.ParentId,
         QuestionTags = vm.Tags == null ? null : vm.Tags
                 .Select(tagId => new QuestionTag()

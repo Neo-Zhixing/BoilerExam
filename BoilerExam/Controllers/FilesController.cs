@@ -79,7 +79,7 @@ namespace BoilerExam.Controllers
       return StatusCode(HttpStatusCode.NoContent);
     }
 
-    [Route("api/Questions/{questionId}/Files")]
+    [Route("api/Questions/{questionId}/Attachments")]
     [HttpGet]
     public async Task<IHttpActionResult> ListFile(int questionId)
     {
@@ -92,7 +92,7 @@ namespace BoilerExam.Controllers
     }
 
     // POST: api/Files
-    [Route("api/Questions/{questionId}/Files")]
+    [Route("api/Questions/{questionId}/Attachments")]
     [HttpPost]
     public async Task<IHttpActionResult> UploadFile(int questionId)
     {

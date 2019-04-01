@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 namespace BoilerExam.Models
 {
   public class Exam
@@ -12,6 +12,8 @@ namespace BoilerExam.Models
 
     public int? SemesterId { get; set; }
     public virtual Semester Semester { get; set; }
+
+    public ICollection<ExamQuestion> ExamQuestions { get; set; }
   }
 
   public class ExamQuestion
@@ -23,6 +25,8 @@ namespace BoilerExam.Models
 
     public int QuestionId { get; set; }
     public virtual Question Question { get; set; }
+
+    public int Points { get; set; }
   }
 
   public class Semester

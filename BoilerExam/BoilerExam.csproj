@@ -114,6 +114,10 @@
     <Compile Include="Migrations\201903310631539_Files.Designer.cs">
       <DependentUpon>201903310631539_Files.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903312054497_QuestionPoints.cs" />
+    <Compile Include="Migrations\201903312054497_QuestionPoints.Designer.cs">
+      <DependentUpon>201903312054497_QuestionPoints.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Exam.cs" />
@@ -146,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903310631539_Files.resx">
       <DependentUpon>201903310631539_Files.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903312054497_QuestionPoints.resx">
+      <DependentUpon>201903312054497_QuestionPoints.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
