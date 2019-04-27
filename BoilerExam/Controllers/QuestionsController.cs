@@ -27,7 +27,8 @@ namespace BoilerExam.Controllers
     {
 
       IQueryable<Question> query = db.Questions
-          .Include(question => question.QuestionTags.Select(qt => qt.Tag));
+          .Include(question => question.QuestionTags.Select(qt => qt.Tag))
+          .Where(question => question.Parent == null);
       if (tags != null)
       {
         var tagIds = tags
@@ -77,8 +78,9 @@ namespace BoilerExam.Controllers
     public async Task<IHttpActionResult> GetQuestion(int id)
     {
       var question = await db.Questions
-      .Include(q => q.Parent)
       .Where(q => q.Id == id)
+      .Include(q => q.Parent)
+      .Include(q => q.Children)
       .FirstOrDefaultAsync();
 
       if (question == null)

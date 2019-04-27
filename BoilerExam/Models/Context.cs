@@ -16,7 +16,7 @@ namespace BoilerExam.Models
 {
   public class ExamLibraryContext : DbContext
   {
-    public ExamLibraryContext() : base("Context")
+    public ExamLibraryContext() : base(Environment.GetEnvironmentVariable("TIER") ?? "test")
     {
     }
 

@@ -21,6 +21,7 @@ namespace BoilerExam.Models
 
         public int? ParentId { get; set; }
         public Question Parent { get; set; }
+        public ICollection<Question> Children { get; set; } 
 
         [Required]
         public string Content { get; set; }
